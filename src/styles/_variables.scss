@@ -1,0 +1,55 @@
+// =============================================================================
+// Design Tokens – DG Demo
+// =============================================================================
+
+// Colors – Primary
+$color-black:        #000000;
+$color-white:        #ffffff;
+$color-yellow:       #fff200;
+
+// Colors – UI
+$color-border:       #d4d4d4;
+$color-text-gray:    #616161;
+$color-bg-light:     #f4f4f4;
+
+// Typography – Family
+$font-family-primary: 'Montserrat', sans-serif;
+
+// Typography – Sizes
+$font-size-xs:   8px;
+$font-size-sm:   12px;
+$font-size-md:   14px;
+$font-size-lg:   18px;
+
+// Typography – Weights
+$font-weight-semibold: 600;
+$font-weight-bold:     700;
+
+// Typography – Line Height
+$line-height-base: 1.25;
+
+// Spacing
+$spacing-xs:  4px;
+$spacing-sm:  8px;
+$spacing-md:  16px;
+$spacing-lg:  24px;
+$spacing-xl:  32px;
+
+// Border Radius
+$border-radius-sm:   3px;
+$border-radius-md:   4px;
+$border-radius-lg:   14px;
+
+// Shadows
+$shadow-card:    0px 0px 12px 0px rgba(0, 0, 0, 0.25);
+$shadow-text:    0px 0px 3px rgba(0, 0, 0, 0.25);
+$shadow-badge:   0px 0px 3px 0px rgba(0, 0, 0, 0.25);
+
+// Card Dimensions
+$card-width:  343px;
+$card-height: 217px;
+
+// Breakpoints
+$breakpoint-small:  600px;
+$breakpoint-medium: 768px;
+$breakpoint-large:  1024px;

@@ -1,0 +1,86 @@
+@import '../../src/styles/variables';
+@import '../../src/styles/mixins';
+
+.showcase {
+  padding: $spacing-xl;
+  background-color: $color-bg-light;
+  min-height: 100vh;
+
+  &__heading {
+    @include heading-1;
+
+    color: $color-black;
+    margin-bottom: $spacing-xl;
+  }
+
+  &__section {
+    margin-bottom: $spacing-xl;
+  }
+
+  &__section-title {
+    @include heading-2;
+
+    color: $color-black;
+    margin-bottom: $spacing-lg;
+    padding-bottom: $spacing-sm;
+    border-bottom: 2px solid $color-border;
+  }
+
+  &__component {
+    background-color: $color-white;
+    border: 1px solid $color-border;
+    border-radius: $border-radius-md;
+    padding: $spacing-lg;
+    margin-bottom: $spacing-lg;
+  }
+
+  &__component-title {
+    @include heading-3;
+
+    color: $color-black;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__component-description {
+    @include body-medium;
+
+    color: $color-text-gray;
+    margin-bottom: $spacing-lg;
+    max-width: 560px;
+  }
+
+  &__component-examples {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-md;
+    margin-bottom: $spacing-lg;
+  }
+
+  &__component-example {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+
+  &__example-label {
+    @include label;
+
+    color: $color-text-gray;
+  }
+
+  &__code {
+    background-color: $color-bg-light;
+    border: 1px solid $color-border;
+    border-radius: $border-radius-md;
+    padding: $spacing-md;
+    overflow-x: auto;
+
+    pre {
+      @include body-medium;
+
+      color: $color-black;
+      margin: 0;
+      white-space: pre;
+    }
+  }
+}

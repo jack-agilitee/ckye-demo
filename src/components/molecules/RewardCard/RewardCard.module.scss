@@ -1,0 +1,154 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.reward-card {
+  position: relative;
+  width: $card-width;
+  height: $card-height;
+  border-radius: $border-radius-lg;
+  border: 0.33px solid $color-border;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+
+  // -------------------------------------------------------------------------
+  // Background image
+  // -------------------------------------------------------------------------
+  &__bg {
+    object-fit: cover;
+    border-radius: $border-radius-lg;
+    pointer-events: none;
+  }
+
+  // -------------------------------------------------------------------------
+  // Header row
+  // -------------------------------------------------------------------------
+  &__header {
+    position: absolute;
+    top: 10.67px;
+    left: 16px;
+    right: 15.67px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-sm;
+  }
+
+  // Brand logo
+  &__logo {
+    position: relative;
+    width: 48px;
+    height: 30px;
+    flex-shrink: 0;
+  }
+
+  &__logo-img {
+    object-fit: contain;
+  }
+
+  // Activate button
+  &__activate-btn {
+    @include button-text;
+    @include focus-visible;
+
+    width: 80px;
+    height: 32px;
+    flex-shrink: 0;
+    background-color: $color-yellow;
+    border: 1px solid $color-border;
+    border-radius: $border-radius-md;
+    color: $color-black;
+    cursor: pointer;
+    text-align: center;
+
+    &:active {
+      opacity: 0.85;
+    }
+  }
+
+  // Rewards badge (icon + label)
+  &__rewards-badge {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    flex-shrink: 0;
+  }
+
+  &__rewards-icon {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  &__rewards-icon-top {
+    position: absolute;
+    top: 2px;
+    left: 1.33px;
+  }
+
+  &__rewards-icon-bottom {
+    position: absolute;
+    bottom: 2px;
+    left: 2px;
+  }
+
+  &__rewards-label {
+    @include body-large;
+
+    color: $color-white;
+    text-shadow: $shadow-text;
+    white-space: nowrap;
+    text-align: right;
+  }
+
+  // -------------------------------------------------------------------------
+  // Content (bottom)
+  // -------------------------------------------------------------------------
+  &__content {
+    position: absolute;
+    bottom: 16.67px;
+    left: 23.67px;
+    width: 177px;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+    align-items: flex-start;
+    justify-content: flex-end;
+  }
+
+  &__title {
+    @include heading-3;
+
+    color: $color-white;
+    text-shadow: $shadow-text;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  // Expiry date row
+  &__expiry {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    height: 18px;
+    padding: $spacing-xs 0;
+    border-radius: $border-radius-sm;
+    box-shadow: $shadow-badge;
+    flex-shrink: 0;
+  }
+
+  &__clock {
+    overflow: hidden;
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+  }
+
+  &__expiry-date {
+    @include label;
+
+    color: $color-white;
+    text-align: center;
+    white-space: nowrap;
+  }
+}
