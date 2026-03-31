@@ -99,7 +99,9 @@
       "mcp__figma-dev-mode-mcp-server__get_design_context",
       "mcp__figma-dev-mode-mcp-server__get_code_connect_suggestions",
       "mcp__figma-dev-mode-mcp-server__send_code_connect_mappings",
-      "mcp__figma-dev-mode-mcp-server__get_screenshot"
+      "mcp__figma-dev-mode-mcp-server__get_screenshot",
+      "mcp__figma-dev-mode-mcp-server__get_metadata",
+      "mcp__github__issue_write"
     ],
     "deny": [],
     "defaultMode": "acceptEdits"
