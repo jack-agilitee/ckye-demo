@@ -144,19 +144,19 @@ describe('RewardsCard', () => {
     it('shows the filled punch image for earned punches', () => {
       const { container } = renderCard({ totalPunches: 2, earnedPunches: 1 });
       const srcs = allImgSrcs(container);
-      expect(srcs.some((s) => s.includes('item-count-filled.png'))).toBe(true);
+      expect(srcs.some((s) => s.includes('item-count-filled.svg'))).toBe(true);
     });
 
     it('shows the empty punch image for unearned punches', () => {
       const { container } = renderCard({ totalPunches: 2, earnedPunches: 1 });
       const srcs = allImgSrcs(container);
-      expect(srcs.some((s) => s.includes('item-count-empty.png'))).toBe(true);
+      expect(srcs.some((s) => s.includes('item-count-empty.svg'))).toBe(true);
     });
 
     it('renders a checkmark image for each filled punch', () => {
       const { container } = renderCard({ totalPunches: 3, earnedPunches: 2 });
       const srcs = allImgSrcs(container);
-      const checkmarks = srcs.filter((s) => s.includes('item-count-checkmark.png'));
+      const checkmarks = srcs.filter((s) => s.includes('item-count-checkmark.svg'));
       // One checkmark per filled punch
       expect(checkmarks).toHaveLength(2);
     });
@@ -164,7 +164,7 @@ describe('RewardsCard', () => {
     it('renders no checkmark images when earnedPunches is 0', () => {
       const { container } = renderCard({ totalPunches: 3, earnedPunches: 0 });
       const srcs = allImgSrcs(container);
-      const checkmarks = srcs.filter((s) => s.includes('item-count-checkmark.png'));
+      const checkmarks = srcs.filter((s) => s.includes('item-count-checkmark.svg'));
       expect(checkmarks).toHaveLength(0);
     });
 

@@ -74,8 +74,8 @@ const RewardsCard: React.FC<RewardsCardProps> = ({
                 <Image
                   src={
                     filled
-                      ? '/images/rewards-card/item-count-filled.png'
-                      : '/images/rewards-card/item-count-empty.png'
+                      ? '/images/rewards-card/item-count-filled.svg'
+                      : '/images/rewards-card/item-count-empty.svg'
                   }
                   alt=""
                   width={16}
@@ -84,7 +84,7 @@ const RewardsCard: React.FC<RewardsCardProps> = ({
                 />
                 {filled && (
                   <Image
-                    src="/images/rewards-card/item-count-checkmark.png"
+                    src="/images/rewards-card/item-count-checkmark.svg"
                     alt=""
                     width={16}
                     height={16}
@@ -104,14 +104,14 @@ const RewardsCard: React.FC<RewardsCardProps> = ({
         <div className={styles['rewards-card__rewards-label']}>
           <div className={styles['rewards-card__rewards-icon']}>
             <Image
-              src="/images/rewards-card/rewards-icon-bottom.png"
+              src="/images/rewards-card/rewards-icon-bottom.svg"
               alt=""
               width={16}
               height={16}
               aria-hidden="true"
             />
             <Image
-              src="/images/rewards-card/rewards-icon-top.png"
+              src="/images/rewards-card/rewards-icon-top.svg"
               alt=""
               width={16}
               height={16}
@@ -128,7 +128,7 @@ const RewardsCard: React.FC<RewardsCardProps> = ({
         <p className={styles['rewards-card__promo-text']}>{promoText}</p>
         <div className={styles['rewards-card__expiry-badge']}>
           <Image
-            src="/images/rewards-card/icon-clock.png"
+            src="/images/rewards-card/icon-clock.svg"
             alt="Expires"
             width={14}
             height={14}
