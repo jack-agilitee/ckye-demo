@@ -1,0 +1,138 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.rewards-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 295 / 180;
+  border-radius: $radius-md;
+  border: 0.33px solid $border-color;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: default;
+
+  &[role='button'] {
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: $focus-ring-width solid $white;
+      outline-offset: $focus-ring-offset;
+    }
+  }
+
+  &__bg {
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+  }
+
+  &__top {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-top-bar-v $spacing-card-h $spacing-sm;
+  }
+
+  &__logo-wrap {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  &__logo {
+    display: block;
+    object-fit: contain;
+  }
+
+  &__tracker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-xs;
+    flex: 1;
+    padding: 0 $spacing-sm;
+  }
+
+  &__punch-group {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+  }
+
+  &__punch {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  &__progress-text {
+    @include label;
+    color: $white;
+    text-shadow: $shadow-text;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  &__rewards-label {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-gap-2xs;
+  }
+
+  &__rewards-icon {
+    display: block;
+  }
+
+  &__rewards-text {
+    @include button-text;
+    color: $white;
+    text-shadow: $shadow-text;
+  }
+
+  &__bottom {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: $spacing-sm $spacing-card-h $spacing-card-h;
+    gap: $spacing-sm;
+  }
+
+  &__title {
+    @include heading-3;
+    color: $white;
+    text-shadow: $shadow-text;
+    margin: 0;
+    flex: 1;
+  }
+
+  &__expiration {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: $spacing-gap-3xs;
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: $radius-sm;
+    padding: $spacing-2xs $spacing-xs;
+    white-space: nowrap;
+  }
+
+  &__clock-icon {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  &__expiration-date {
+    @include label;
+    font-size: $font-size-xs;
+    color: $white;
+    text-shadow: $shadow-text;
+  }
+}

@@ -1,0 +1,29 @@
+@use 'variables' as *;
+
+// Headings
+@mixin heading-1 { font-family: $font-family-primary; font-weight: $font-weight-bold; font-size: 32px; line-height: 1.25; }
+@mixin heading-2 { font-family: $font-family-primary; font-weight: $font-weight-bold; font-size: 24px; line-height: 1.25; }
+@mixin heading-3 { font-family: $font-family-primary; font-weight: $font-weight-bold; font-size: $font-size-lg; line-height: 1.25; }
+
+// Body
+@mixin body-large { font-family: $font-family-primary; font-weight: 400; font-size: $font-size-md; line-height: 1.5; }
+@mixin body-medium { font-family: $font-family-primary; font-weight: 400; font-size: 12px; line-height: 1.5; }
+@mixin body-small { font-family: $font-family-primary; font-weight: 400; font-size: $font-size-sm; line-height: 1.5; }
+
+// Special text
+@mixin label { font-family: $font-family-primary; font-weight: $font-weight-semibold; font-size: $font-size-sm; line-height: 1.25; }
+@mixin button-text { font-family: $font-family-primary; font-weight: $font-weight-semibold; font-size: $font-size-md; line-height: 1.25; }
+@mixin nav-item { font-family: $font-family-primary; font-weight: $font-weight-semibold; font-size: $font-size-md; line-height: 1.25; }
+
+// Weights
+@mixin font-medium { font-weight: 500; }
+@mixin font-semibold { font-weight: $font-weight-semibold; }
+@mixin font-bold { font-weight: $font-weight-bold; }
+
+// Text colors
+@mixin text-primary { color: $black; }
+@mixin text-secondary { color: #666; }
+
+// Utilities
+@mixin truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@mixin line-clamp($lines) { display: -webkit-box; -webkit-line-clamp: $lines; -webkit-box-orient: vertical; overflow: hidden; }

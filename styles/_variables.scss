@@ -1,0 +1,42 @@
+// Colors
+$white: #ffffff;
+$black: #000000;
+$border-color: #d4d4d4;
+$punch-empty-fill: rgba(183, 183, 183, 0.6);
+$punch-empty-stroke: #bfbfbf;
+
+// Typography
+$font-family-primary: 'Montserrat', sans-serif;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Font sizes
+$font-size-xs: 8px;
+$font-size-sm: 10px;
+$font-size-md: 14px;
+$font-size-lg: 18px;
+
+// Spacing
+$spacing-2xs: 2px;
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+
+// Component-specific spacing (Figma exact values)
+$spacing-top-bar-v: 10px;
+$spacing-card-h: 12px;
+$spacing-gap-2xs: 2px;
+$spacing-gap-3xs: 3px;
+
+// Border radius
+$radius-sm: 3px;
+$radius-md: 14px;
+
+// Shadows
+$shadow-card: 0 0 12px rgba(0, 0, 0, 0.25);
+$shadow-text: 0 0 3px rgba(0, 0, 0, 0.25);
+
+// Focus
+$focus-ring-width: 2px;
+$focus-ring-offset: 2px;
