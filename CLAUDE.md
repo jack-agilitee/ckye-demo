@@ -5,29 +5,21 @@ ID: cme78g7a700018ovg8p0ijuv0
 This file provides context and instructions for Claude Code to help with this project.
 
 ## Project Information
-- Project Name: Ckye Frontend
-- Working Directory: /Users/jack/Documents/Projects/Ckye/ckye-fe
-- Framework: Next.js 15.4.2 with React 19.1.0
+- Project Name: DG Demo
+- Working Directory: /Users/jack/Documents/Projects/dg-demo
+- Framework: Next.js 16.2.1 with React 19.2.4
+- Language: TypeScript
 - Styling: SCSS with CSS Modules and BEM methodology
 - Component Style: Functional components with React hooks only
 - Design Pattern: Atomic Design (atoms, molecules, organisms, templates, pages)
-- Database: Azure PostgreSQL (accessed via Prisma ORM only)
 
 ## Development Commands
-**IMPORTANT**: Always run commands from the `ckye-fe` folder (project root).
 
 ```bash
 npm run build      # Build production
 npm run dev        # Development server
-npm run test       # Run tests
+npm run start      # Start production server
 npm run lint       # Lint code
-npm run typecheck  # TypeScript checking
-
-# Prisma Commands
-npx prisma generate       # Generate Prisma Client
-npx prisma migrate dev    # Run migrations
-npx prisma studio         # Open Prisma Studio
-npx prisma format         # Format schema
 ```
 
 ## Pull Request Creation Rules
@@ -60,19 +52,23 @@ Before creating any pull request, run ALL commands in order:
 
 ### File Structure
 ```
-src/
-  components/
-    atoms/        # Basic blocks (Button, Input)
-    molecules/    # Combinations (FormField, UserCard)
-    organisms/    # Complex (UsersTable, Navigation)
-    templates/    # Page layouts
-    pages/        # Complete pages
-  context/        # Global state
-  hooks/          # Custom hooks
-  lib/            # API functions
-  styles/         # SCSS utilities
-    _variables.scss
-    _mixins.scss
+app/                  # Next.js App Router
+  layout.tsx          # Root layout
+  page.tsx            # Home page
+  globals.css         # Global styles
+components/
+  atoms/              # Basic blocks (Button, Input)
+  molecules/          # Combinations (FormField, UserCard)
+  organisms/          # Complex (UsersTable, Navigation)
+  templates/          # Page layouts
+  pages/              # Complete pages
+context/              # Global state
+hooks/                # Custom hooks
+lib/                  # API functions
+styles/               # SCSS utilities
+  _variables.scss
+  _mixins.scss
+public/               # Static assets
 ```
 
 ### SCSS & CSS Modules
@@ -80,8 +76,8 @@ src/
 - **Usage**: `className={styles['class-name']}`
 - **BEM naming**: `.block`, `.block__element`, `.block--modifier`
 - **NO Tailwind CSS**
-- **Always import variables**: `@import '../../../styles/variables';`
-- **Always import mixins**: `@import '../../../styles/mixins';`
+- **Always import variables**: `@use` or `@import` from styles folder (adjust relative path based on component depth)
+- **Always import mixins**: `@use` or `@import` from styles folder
 - **Never hardcode colors or fonts** - use variables and mixins
 - **Prefer CSS pseudo-selectors** over JavaScript hover handlers
 
@@ -121,8 +117,8 @@ export default Button;
 
 ### SCSS Module with BEM
 ```scss
-@import '../../../styles/variables';
-@import '../../../styles/mixins';
+@import '../../styles/variables';
+@import '../../styles/mixins';
 
 .button {
   @include button-text;
@@ -171,63 +167,6 @@ export const useApp = () => {
 };
 ```
 
-## Database & Prisma
-
-### Critical Rules
-- **ONLY API routes** can use Prisma Client
-- **NEVER import Prisma** in frontend components
-- **ALL database operations** through API endpoints
-- **Frontend calls API routes**, which use Prisma
-
-### Prisma Configuration
-- Schema: `ckye-fe/prisma/schema.prisma`
-- Client: `src/generated/prisma/`
-- Connection: `DATABASE_URL` in `.env`
-
-### Query Best Practices
-```javascript
-// ✅ Good - Select only needed fields
-await prisma.user.findMany({
-  select: { id: true, name: true },
-  skip: (page - 1) * limit,
-  take: limit
-});
-
-// ❌ Bad - Fetching all fields
-await prisma.user.findMany();
-```
-
-### Singleton Pattern
-```javascript
-// lib/prisma.js
-import { PrismaClient } from '@prisma/client';
-
-const globalForPrisma = globalThis;
-export const prisma = globalForPrisma.prisma || new PrismaClient({
-  log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error']
-});
-
-if (process.env.NODE_ENV !== 'production') {
-  globalForPrisma.prisma = prisma;
-}
-```
-
-### Error Handling
-```javascript
-import { Prisma } from '@prisma/client';
-
-try {
-  const user = await prisma.user.create({ data });
-  return NextResponse.json(user, { status: 201 });
-} catch (error) {
-  if (error instanceof Prisma.PrismaClientKnownRequestError) {
-    if (error.code === 'P2002') {
-      return NextResponse.json({ error: 'Email exists' }, { status: 409 });
-    }
-  }
-  return NextResponse.json({ error: 'Internal error' }, { status: 500 });
-}
-```
 
 ## API Development
 
@@ -385,10 +324,9 @@ export function useApi(apiFunction, deps = []) {
 5. **Functional components only** - no classes
 6. **API routes only** for database access
 7. **Run all checks** before creating PRs
-8. **Work from ckye-fe folder** for npm commands
 
 ## Project Paths
-- Root: `/Users/jack/Documents/Projects/Ckye/ckye-fe/`
+- Root: `/Users/jack/Documents/Projects/dg-demo/`
 - Components: Follow atomic design structure
-- API Routes: `app/api/[resource]/route.js`
-- Styles: Import from `src/styles/`
+- API Routes: `app/api/[resource]/route.ts`
+- Styles: Import from `styles/`
