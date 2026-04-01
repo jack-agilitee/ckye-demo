@@ -1,0 +1,152 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.showcase {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: $color-bg-subtle;
+
+  &__header {
+    text-align: center;
+    padding: $spacing-2xl $spacing-lg;
+
+    h1 {
+      @include heading-1;
+      color: $color-text-heading;
+      margin: 0 0 $spacing-sm;
+    }
+
+    p {
+      @include body-large;
+      color: $color-text-secondary;
+      margin: 0;
+    }
+  }
+
+  &__content {
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 $spacing-lg $spacing-2xl;
+  }
+
+  &__section {
+    margin-bottom: $spacing-2xl;
+  }
+
+  &__sectionTitle {
+    @include heading-2;
+    color: $color-text-heading;
+    border-bottom: 2px solid $black;
+    padding-bottom: $spacing-sm;
+    margin: 0 0 $spacing-lg;
+  }
+
+  &__placeholder {
+    @include body-medium;
+    color: $color-text-muted;
+    font-style: italic;
+    padding: $spacing-lg;
+    text-align: center;
+  }
+}
+
+.showcaseNav {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-lg;
+  padding: $spacing-md $spacing-lg;
+  border-bottom: 1px solid $border-color;
+  background-color: $white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  &__link {
+    @include nav-item;
+    color: $color-text-secondary;
+    text-decoration: none;
+    padding: $spacing-sm $spacing-md;
+    border-radius: $radius-sm;
+    transition: color 0.2s, background-color 0.2s;
+
+    &:hover {
+      color: $color-text-heading;
+      background-color: $color-bg-subtle;
+    }
+  }
+}
+
+.showcaseItem {
+  margin-bottom: $spacing-xl;
+  background-color: $white;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+  overflow: hidden;
+
+  &__title {
+    @include heading-3;
+    padding: $spacing-md $spacing-lg;
+    background-color: $color-bg-subtle;
+    margin: 0;
+    border-bottom: 1px solid $border-color;
+  }
+
+  &__preview {
+    padding: $spacing-xl;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+  }
+
+  &__rewardsCardWrapper {
+    width: 343px;
+  }
+}
+
+.codeExample {
+  background-color: $color-text-heading;
+
+  &__header {
+    background-color: $black;
+    padding: $spacing-sm $spacing-lg;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__language {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    text-transform: uppercase;
+  }
+
+  &__button {
+    @include label;
+    padding: $spacing-xs $spacing-md;
+    background-color: $color-text-muted;
+    color: $white;
+    border: none;
+    border-radius: $radius-sm;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $color-text-secondary;
+    }
+  }
+
+  &__block {
+    margin: 0;
+    padding: $spacing-lg;
+    overflow-x: auto;
+  }
+
+  &__content {
+    color: $white;
+    font-family: monospace;
+    font-size: $font-size-sm;
+    white-space: pre;
+  }
+}
