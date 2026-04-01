@@ -2,6 +2,7 @@
 
 import React from 'react';
 import styles from './showcase.module.scss';
+import RewardsCard from '@/components/molecules/RewardsCard/RewardsCard';
 
 function ShowcaseNavigation() {
   return (
@@ -66,7 +67,83 @@ export default function ShowcasePage() {
 
         <section id="molecules" className={styles.showcase__section}>
           <h2 className={styles.showcase__sectionTitle}>Molecules</h2>
-          <p className={styles.showcase__placeholder}>No molecules available yet</p>
+
+          <ShowcaseItem
+            title="RewardsCard - In Progress"
+            code={`<RewardsCard
+  backgroundImageUrl="/rewards-card/rewards-card-bg.png"
+  brandLogoUrl="/rewards-card/cheetos-logo.png"
+  rewardDescription="Buy 5 Cheetos products to earn 1 for 1¢"
+  totalPunches={5}
+  completedPunches={2}
+  expirationDate="12/31/26"
+  onClick={() => {}}
+/>`}
+          >
+            <div className={styles.showcaseItem__rewardsCardWrapper}>
+              <RewardsCard
+                backgroundImageUrl="/rewards-card/rewards-card-bg.png"
+                brandLogoUrl="/rewards-card/cheetos-logo.png"
+                rewardDescription="Buy 5 Cheetos products to earn 1 for 1¢"
+                totalPunches={5}
+                completedPunches={2}
+                expirationDate="12/31/26"
+                onClick={() => {}}
+              />
+            </div>
+          </ShowcaseItem>
+
+          <ShowcaseItem
+            title="RewardsCard - With Banked Rewards"
+            code={`<RewardsCard
+  backgroundImageUrl="/rewards-card/rewards-card-bg.png"
+  brandLogoUrl="/rewards-card/cheetos-logo.png"
+  rewardDescription="Buy 5 Cheetos products to earn 1 for 1¢"
+  totalPunches={5}
+  completedPunches={5}
+  expirationDate="12/31/26"
+  bankedRewards={2}
+  onClick={() => {}}
+/>`}
+          >
+            <div className={styles.showcaseItem__rewardsCardWrapper}>
+              <RewardsCard
+                backgroundImageUrl="/rewards-card/rewards-card-bg.png"
+                brandLogoUrl="/rewards-card/cheetos-logo.png"
+                rewardDescription="Buy 5 Cheetos products to earn 1 for 1¢"
+                totalPunches={5}
+                completedPunches={5}
+                expirationDate="12/31/26"
+                bankedRewards={2}
+                onClick={() => {}}
+              />
+            </div>
+          </ShowcaseItem>
+
+          <ShowcaseItem
+            title="RewardsCard - Just Started"
+            code={`<RewardsCard
+  backgroundImageUrl="/rewards-card/rewards-card-bg.png"
+  brandLogoUrl="/rewards-card/cheetos-logo.png"
+  rewardDescription="Buy 5 Cheetos products to earn 1 for 1¢"
+  totalPunches={5}
+  completedPunches={0}
+  expirationDate="12/31/26"
+  onClick={() => {}}
+/>`}
+          >
+            <div className={styles.showcaseItem__rewardsCardWrapper}>
+              <RewardsCard
+                backgroundImageUrl="/rewards-card/rewards-card-bg.png"
+                brandLogoUrl="/rewards-card/cheetos-logo.png"
+                rewardDescription="Buy 5 Cheetos products to earn 1 for 1¢"
+                totalPunches={5}
+                completedPunches={0}
+                expirationDate="12/31/26"
+                onClick={() => {}}
+              />
+            </div>
+          </ShowcaseItem>
         </section>
 
         <section id="organisms" className={styles.showcase__section}>

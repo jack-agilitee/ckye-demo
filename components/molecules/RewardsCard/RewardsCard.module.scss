@@ -1,0 +1,196 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+// ==========================================================================
+// RewardsCard
+// Loyalty punch-card displayed in rewards lists and detail views.
+// Aspect ratio locked to 343/216; all child elements are absolutely
+// positioned over the background image.
+// ==========================================================================
+
+.rewards-card {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 343px;
+  aspect-ratio: 343 / 216;
+  border-radius: $radius-md;
+  border: 0.33px solid $border-color;
+  box-shadow: $shadow-card;
+
+  // Clickable state — applied when onClick is present (role="button")
+  &[role='button'] {
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: $focus-ring-width solid $white;
+      outline-offset: $focus-ring-offset;
+    }
+  }
+
+  // ------------------------------------------------------------------
+  // Background image
+  // ------------------------------------------------------------------
+  &__background {
+    position: absolute;
+    inset: 0;
+    object-fit: cover;
+    border-radius: $radius-md;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  // ------------------------------------------------------------------
+  // Top row: logo | punch tracker | badge
+  // ------------------------------------------------------------------
+  &__top-row {
+    position: absolute;
+    top: 11px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    gap: $spacing-sm;
+    width: 295px;
+    height: 32px;
+    align-items: flex-start;
+    z-index: 1;
+  }
+
+  // Thin wrapper so Next.js Image can receive a className while still
+  // sitting in a predictable flex slot.
+  &__logo-wrapper {
+    flex-shrink: 0;
+    width: 48px;
+    height: 30px;
+  }
+
+  &__logo {
+    width: 48px;
+    height: 30px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  // ------------------------------------------------------------------
+  // Punch tracker column
+  // ------------------------------------------------------------------
+  &__tracker {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    align-items: flex-start;
+    justify-content: flex-end;
+    min-height: 1px;
+  }
+
+  &__punch-group {
+    display: flex;
+    flex-direction: row;
+    gap: $spacing-sm;
+    align-items: center;
+  }
+
+  &__punch-circle {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  &__tracker-label {
+    @include label;
+    color: $white;
+    text-shadow: $shadow-text;
+  }
+
+  // Banked rewards pill — rendered below the tracker label when bankedRewards > 0
+  &__banked {
+    @include caption;
+    color: $white;
+    text-shadow: $shadow-text;
+    background-color: $overlay-dark;
+    border-radius: $radius-sm;
+    padding: $spacing-2xs $spacing-xs;
+    white-space: nowrap;
+  }
+
+  // ------------------------------------------------------------------
+  // Rewards badge
+  // ------------------------------------------------------------------
+  &__badge {
+    display: flex;
+    flex-direction: row;
+    gap: $spacing-sm;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  &__badge-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  &__badge-label {
+    @include button-text;
+    color: $white;
+    text-shadow: $shadow-text;
+    white-space: nowrap;
+    text-align: right;
+  }
+
+  // ------------------------------------------------------------------
+  // Bottom content block: description + expiration
+  // ------------------------------------------------------------------
+  &__content {
+    position: absolute;
+    bottom: 17px;
+    left: $spacing-lg;
+    width: 177px;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+    align-items: flex-start;
+    justify-content: flex-end;
+    z-index: 1;
+  }
+
+  &__description {
+    @include heading-3;
+    @include line-clamp(2);
+    width: 177px;
+    color: $white;
+    text-shadow: $shadow-text;
+    margin: 0;
+  }
+
+  // ------------------------------------------------------------------
+  // Expiration row
+  // ------------------------------------------------------------------
+  &__expiration {
+    display: flex;
+    flex-direction: row;
+    gap: $spacing-xs;
+    align-items: center;
+    justify-content: center;
+    height: 18px;
+    padding: $spacing-xs $spacing-xs $spacing-xs 0;
+    border-radius: $radius-sm;
+    box-shadow: $shadow-text;
+  }
+
+  &__expiration-icon {
+    width: 14px;
+    height: 14px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  &__expiration-date {
+    @include caption;
+    color: $white;
+    text-align: center;
+    white-space: nowrap;
+  }
+}
