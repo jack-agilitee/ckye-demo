@@ -1,4 +1,4 @@
-## Create a New Component from Figma
+## Create a New Component from Jira
 
 **Command:** Create a new component
 
@@ -6,7 +6,7 @@
 - **NEVER stop to ask the user questions.** Make every decision yourself and keep executing.
 - **Maximize parallel agent launches.** Independent agents MUST run simultaneously.
 - **Speed is everything.** The user should be able to run this and walk away.
-- The only user input is the Figma URL provided when invoking the command.
+- The only user input is a **Jira issue URL or key** (e.g., `https://ckye.atlassian.net/browse/CKYE-31` or `CKYE-31`).
 - If Code Connect mappings are missing, send empty mappings `[]` and move on immediately.
 - **Every numbered step below maps to a specific agent.** Use the `Agent` tool with the `subagent_type` shown.
 
@@ -14,9 +14,29 @@
 
 ## Process
 
+### Phase 0: Read Jira Story (you)
+
+**Step 0 — Fetch Jira issue and extract Figma URL**
+
+1. Parse the user input to get the issue key (e.g., `CKYE-31`)
+   - If a full URL like `https://ckye.atlassian.net/browse/CKYE-31` is provided, extract the key from the path
+   - Cloud ID is `ckye.atlassian.net`
+2. Call `mcp__atlassian__getJiraIssue` with `cloudId: "ckye.atlassian.net"`, `issueIdOrKey`, and `responseContentFormat: "markdown"`
+3. Read the issue description and **scan for a Figma URL** (any URL matching `figma.com/design/...` or `figma.com/file/...`)
+4. Also extract from the story:
+   - **Summary/title** — for naming context
+   - **Acceptance criteria** — to inform component behavior and states
+   - **Job stories / user stories** — to understand intent
+   - **Open items** — to note known gaps and make reasonable default decisions
+5. If **no Figma URL is found** in the issue, check issue comments and linked issues. If still none, **stop and tell the user** no Figma URL was found in the Jira issue.
+6. If **multiple Figma URLs** are found, use all of them — they may represent different states or components within the story.
+
+Save all extracted Jira context (summary, acceptance criteria, stories, open items) to pass to downstream agents alongside the Figma design data.
+
 ### Phase 1: Extract Design (you + figma-design-extractor)
 
 **Step 1 — Parse Figma URL and extract design context**
+- Use the Figma URL(s) extracted from the Jira issue
 - Extract `fileKey` and `nodeId` from the URL (e.g., `node-id=1-2` → `1:2`)
 - Load the `figma:figma-use` skill, then call `get_design_context` with fileKey + nodeId
 - If Code Connect says components are unmapped → send empty mappings `[]` immediately
@@ -27,7 +47,7 @@
 Agent(subagent_type="figma-design-extractor")
 ```
 
-Provide: Figma URL, fileKey, nodeId, the raw `get_design_context` output (code + screenshot).
+Provide: Figma URL, fileKey, nodeId, the raw `get_design_context` output (code + screenshot), **and the Jira story context** (acceptance criteria, job stories, open items).
 
 Expect back:
 - Component name (PascalCase)
@@ -36,6 +56,7 @@ Expect back:
 - Design token specs (colors, typography, spacing, shadows)
 - Asset inventory (all image URLs to download)
 - Implementation notes
+- How acceptance criteria map to component behavior/states
 
 ### Phase 2: Determine Structure (atomic-design-architect)
 
@@ -61,10 +82,10 @@ Expect back:
 Agent(subagent_type="git-github-specialist")
 ```
 
-Provide: Component name, atomic level, Figma URL, repo `jack-agilitee/dg-demo`.
+Provide: Component name, atomic level, Figma URL, Jira issue key + URL, repo `jack-agilitee/dg-demo`.
 
 Expect back:
-- GitHub issue number and URL
+- GitHub issue number and URL (include Jira link in the GitHub issue body)
 - Feature branch name (e.g., `feature/rewards-card`)
 - Confirmation branch is checked out locally
 
@@ -200,7 +221,7 @@ Provide:
 - Component name, issue number
 - Commit message: `feat: add ${ComponentName} component from Figma design\n\nCloses #${issue-number}`
 - PR title: `feat: Add ${ComponentName} component`
-- PR body with: summary, Figma link, files added, test plan
+- PR body with: summary, **Jira issue link**, Figma link, acceptance criteria from Jira, files added, test plan
 - After PR creation: add comment `Page ID: cme78g7a700018ovg8p0ijuv0`
 
 Expect back:
@@ -230,6 +251,7 @@ Provide: PR number, repo, project standards from CLAUDE.md.
 
 | Step | Agent | Parallel Group |
 |------|-------|---------------|
+| 0 | (self) — Jira fetch + Figma URL extraction | — |
 | 1 | (self) — Figma extraction | A |
 | 2 | `figma-design-extractor` | A |
 | 3 | `atomic-design-architect` | — |
