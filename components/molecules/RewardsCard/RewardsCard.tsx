@@ -24,7 +24,8 @@ const RewardsCard: React.FC<RewardsCardProps> = ({
   onClick,
   className = '',
 }) => {
-  const punches = Array.from({ length: totalPunches }, (_, i) => i < earnedPunches);
+  const clampedEarned = Math.min(earnedPunches, totalPunches);
+  const punches = Array.from({ length: totalPunches }, (_, i) => i < clampedEarned);
 
   return (
     <div
