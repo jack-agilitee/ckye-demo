@@ -1,9 +1,10 @@
-@import '../../styles/variables';
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
 
 .showcase {
   min-height: 100vh;
-  background-color: #f5f5f5;
-  padding: 40px 24px;
+  background-color: $color-bg-subtle;
+  padding: 40px $spacing-lg;
   font-family: $font-family-primary;
 
   &__header {
@@ -11,15 +12,14 @@
     margin-bottom: 48px;
 
     h1 {
-      font-size: 32px;
-      font-weight: $font-weight-bold;
-      color: #1a1a1a;
-      margin: 0 0 8px;
+      @include heading-1;
+      color: $color-text-heading;
+      margin: 0 0 $spacing-sm;
     }
 
     p {
-      font-size: 16px;
-      color: #555;
+      @include body-large;
+      color: $color-text-muted;
       margin: 0;
     }
   }
@@ -30,18 +30,19 @@
   }
 
   &__sectionTitle {
-    font-size: 22px;
+    font-family: $font-family-primary;
+    font-size: $font-size-xl;
     font-weight: $font-weight-bold;
-    color: #1a1a1a;
-    margin: 0 0 4px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid #d4d4d4;
+    color: $color-text-heading;
+    margin: 0 0 $spacing-xs;
+    padding-bottom: $spacing-sm;
+    border-bottom: 2px solid $border-color;
   }
 
   &__sectionDescription {
-    font-size: 14px;
-    color: #666;
-    margin: 8px 0 32px;
+    @include body-large;
+    color: $color-text-secondary;
+    margin: $spacing-sm 0 32px;
   }
 
   &__grid {
@@ -54,12 +55,12 @@
 .showcaseItem {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: $spacing-card-h;
 
   &__label {
+    @include label;
     font-size: 13px;
-    font-weight: $font-weight-semibold;
-    color: #444;
+    color: $color-text-label;
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }

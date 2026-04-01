@@ -164,6 +164,12 @@ describe('RewardsCard', () => {
       ).toBeInTheDocument();
     });
 
+    it('does not apply aria-label when onClick is not provided', () => {
+      const { container } = renderCard({ onClick: undefined });
+      const card = container.firstChild as HTMLElement;
+      expect(card).not.toHaveAttribute('aria-label');
+    });
+
     it('calls onClick when Enter key is pressed', () => {
       const onClick = jest.fn();
       renderCard({ onClick });

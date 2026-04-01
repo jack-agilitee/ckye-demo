@@ -11,6 +11,7 @@ export interface RewardsCardProps {
   expirationDate: string;
   backgroundImage: string;
   logoSrc: string;
+  logoAlt?: string;
   onClick?: () => void;
 }
 
@@ -21,6 +22,7 @@ const RewardsCard: React.FC<RewardsCardProps> = ({
   expirationDate,
   backgroundImage,
   logoSrc,
+  logoAlt = 'Brand logo',
   onClick,
 }) => {
   const clampedPurchased = Math.min(purchasedPunches, totalPunches);
@@ -41,7 +43,7 @@ const RewardsCard: React.FC<RewardsCardProps> = ({
             }
           : undefined
       }
-      aria-label={`Rewards card: ${title}`}
+      aria-label={onClick ? `Rewards card: ${title}` : undefined}
     >
       {/* Background image */}
       <Image
@@ -59,7 +61,7 @@ const RewardsCard: React.FC<RewardsCardProps> = ({
         <div className={styles['rewards-card__logo-wrap']}>
           <Image
             src={logoSrc}
-            alt="Brand logo"
+            alt={logoAlt}
             width={60}
             height={30}
             className={styles['rewards-card__logo']}

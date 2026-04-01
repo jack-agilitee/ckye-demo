@@ -118,7 +118,7 @@
     display: flex;
     align-items: center;
     gap: $spacing-gap-3xs;
-    background: rgba(0, 0, 0, 0.35);
+    background: $overlay-expiration-bg;
     border-radius: $radius-sm;
     padding: $spacing-2xs $spacing-xs;
     white-space: nowrap;
