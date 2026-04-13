@@ -2,7 +2,15 @@
 const config = {
   testEnvironment: 'jsdom',
   transform: {
-    '^.+\\.(ts|tsx)$': '@swc/jest',
+    '^.+\\.(ts|tsx)$': ['@swc/jest', {
+      jsc: {
+        transform: {
+          react: {
+            runtime: 'automatic',
+          },
+        },
+      },
+    }],
   },
   moduleNameMapper: {
     // CSS Modules

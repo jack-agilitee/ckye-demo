@@ -1,0 +1,193 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+// ==========================================================================
+// RewardCard — branded rewards card molecule
+// Variants: default (activated) | explore
+// ==========================================================================
+
+.reward-card {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 343 / 217;
+  width: 100%;
+  border-radius: $radius-md;
+  border: 0.33px solid $border-color;
+  box-shadow: $shadow-card;
+
+  // -----------------------------------------------------------------------
+  // Background image — full-bleed cover fill
+  // -----------------------------------------------------------------------
+  &__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  // -----------------------------------------------------------------------
+  // Header — top row: logo / tracker / badge
+  // -----------------------------------------------------------------------
+  &__header {
+    position: absolute;
+    top: $spacing-sm;
+    left: $spacing-lg;
+    right: $spacing-lg;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  // -----------------------------------------------------------------------
+  // Logo
+  // -----------------------------------------------------------------------
+  &__logo-wrap {
+    width: $size-logo-w;
+    height: $size-logo-h;
+    flex-shrink: 0;
+  }
+
+  &__logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  // -----------------------------------------------------------------------
+  // Tracker — punch circles + label (activated variant)
+  // -----------------------------------------------------------------------
+  &__tracker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-xs;
+  }
+
+  &__circles {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+  }
+
+  &__tracker-label {
+    font-family: $font-family-primary;
+    font-weight: $font-weight-medium;
+    font-size: $font-size-sm;
+    line-height: $line-height-sm;
+    color: $white;
+  }
+
+  // -----------------------------------------------------------------------
+  // Badge — rewards icon + "Rewards" text
+  // -----------------------------------------------------------------------
+  &__badge-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: $spacing-xs;
+  }
+
+  &__rewards-badge {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+  }
+
+  &__rewards-label {
+    @include button-text;
+    color: $white;
+    text-shadow: $shadow-text;
+  }
+
+  // -----------------------------------------------------------------------
+  // Bottom — description + expiry
+  // -----------------------------------------------------------------------
+  &__bottom {
+    position: absolute;
+    bottom: $spacing-md;
+    left: $spacing-lg;
+    right: $spacing-lg;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+  }
+
+  // -----------------------------------------------------------------------
+  // Description
+  // -----------------------------------------------------------------------
+  &__description {
+    @include heading-3;
+    color: $white;
+    text-shadow: $shadow-text;
+    @include truncate;
+  }
+
+  // -----------------------------------------------------------------------
+  // Expiry pill
+  // -----------------------------------------------------------------------
+  &__expiry-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-2xs;
+    padding: $spacing-xs $spacing-xs $spacing-xs 0;
+    border-radius: $radius-xs;
+    box-shadow: $shadow-text;
+    align-self: flex-start;
+  }
+
+  &__expiry-text {
+    @include caption;
+    color: $white;
+  }
+
+  // -----------------------------------------------------------------------
+  // Activate button (explore variant only)
+  // -----------------------------------------------------------------------
+  &__activate-btn {
+    @include button-text;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $color-activate-yellow;
+    color: $black;
+    border: none;
+    border-radius: $radius-sm;
+    padding: $spacing-xs $spacing-sm;
+    cursor: pointer;
+    align-self: flex-start;
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+    &:focus-visible {
+      outline: $focus-ring-width solid $white;
+      outline-offset: $focus-ring-offset;
+    }
+  }
+
+  // -----------------------------------------------------------------------
+  // Banked rewards badge/pill
+  // -----------------------------------------------------------------------
+  &__banked-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-2xs;
+    padding: $spacing-2xs $spacing-xs;
+    border-radius: $radius-xs;
+    box-shadow: $shadow-text;
+    align-self: flex-start;
+  }
+
+  // -----------------------------------------------------------------------
+  // Modifier: explore variant
+  // Shows activate button; hides tracker
+  // -----------------------------------------------------------------------
+  &--explore {
+    .reward-card__tracker {
+      display: none;
+    }
+  }
+}
