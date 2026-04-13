@@ -29,36 +29,51 @@ const RewardsCard: React.FC<RewardsCardProps> = ({
   onActivate,
   onClick,
 }) => {
+  const clampedPurchased = Math.min(purchasedCount, requiredCount);
+
   const handleActivateClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     onActivate?.();
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onClick?.();
+    }
+  };
+
   const renderPunchCircles = () => {
     const circles = [];
     for (let i = 0; i < requiredCount; i++) {
-      const isFilled = i < purchasedCount;
+      const isFilled = i < clampedPurchased;
       circles.push(
-        <img
-          key={i}
+        <Image
+          key={`punch-${i}`}
           src={isFilled ? '/rewards-card/punch-circle-filled.svg' : '/rewards-card/punch-circle-empty.svg'}
           alt={isFilled ? 'Purchased' : 'Remaining'}
           width={16}
           height={16}
           className={styles['rewards-card__punch-circle']}
+          unoptimized
         />
       );
     }
     return circles;
   };
 
+  const cardClasses = [
+    styles['rewards-card'],
+    onClick ? styles['rewards-card--clickable'] : '',
+  ].filter(Boolean).join(' ');
+
   return (
     <div
-      className={styles['rewards-card']}
+      className={cardClasses}
       role="article"
       onClick={onClick}
       tabIndex={onClick ? 0 : undefined}
-      onKeyDown={onClick ? (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick(); } } : undefined}
+      onKeyDown={onClick ? handleKeyDown : undefined}
     >
       {/* Background image */}
       <Image
@@ -88,14 +103,9 @@ const RewardsCard: React.FC<RewardsCardProps> = ({
           <div className={styles['rewards-card__tracker']}>
             <div className={styles['rewards-card__punch-group']}>
               {renderPunchCircles()}
-              {bankedRewards > 0 && (
-                <span className={styles['rewards-card__banked']}>
-                  +{bankedRewards}
-                </span>
-              )}
             </div>
             <span className={styles['rewards-card__tracker-label']}>
-              {purchasedCount} of {requiredCount} Purchased
+              {clampedPurchased} of {requiredCount} Purchased
             </span>
           </div>
         )}
@@ -113,27 +123,36 @@ const RewardsCard: React.FC<RewardsCardProps> = ({
 
         {/* Rewards badge */}
         <div className={styles['rewards-card__badge']}>
-          <img
+          <Image
             src="/rewards-card/rewards-star.svg"
             alt=""
             width={16}
             height={16}
             className={styles['rewards-card__badge-icon']}
+            unoptimized
           />
           <span className={styles['rewards-card__badge-text']}>Rewards</span>
         </div>
       </div>
 
+      {/* Banked rewards badge */}
+      {variant === 'activated' && bankedRewards > 0 && (
+        <span className={styles['rewards-card__banked']}>
+          +{bankedRewards}
+        </span>
+      )}
+
       {/* Bottom content */}
       <div className={styles['rewards-card__content']}>
         <p className={styles['rewards-card__description']}>{description}</p>
         <div className={styles['rewards-card__expiry']}>
-          <img
+          <Image
             src="/rewards-card/clock-icon.svg"
             alt=""
             width={14}
             height={14}
             className={styles['rewards-card__expiry-icon']}
+            unoptimized
           />
           <span className={styles['rewards-card__expiry-text']}>{expirationDate}</span>
         </div>

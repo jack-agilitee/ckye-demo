@@ -6,10 +6,10 @@ import RewardsCard from './RewardsCard';
 
 jest.mock('next/image', () => ({
   __esModule: true,
-  default: (props: React.ImgHTMLAttributes<HTMLImageElement> & { fill?: boolean; priority?: boolean; sizes?: string }) => {
-    const { fill: _fill, priority: _priority, sizes: _sizes, ...rest } = props;
+  default: (props: Record<string, unknown>) => {
+    const { fill, priority, sizes, unoptimized, ...rest } = props;
     // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-    return <img {...rest} />;
+    return <img {...(rest as React.ImgHTMLAttributes<HTMLImageElement>)} />;
   },
 }));
 

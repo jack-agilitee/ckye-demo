@@ -28,7 +28,15 @@ $line-height-tracker-label: 14px;
   box-shadow: $shadow-card;
   border: $border-width-thin solid $border-color;
   overflow: hidden;
-  cursor: pointer;
+
+  &--clickable {
+    cursor: pointer;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $black;
+    outline-offset: $focus-ring-offset;
+  }
 
   &__background {
     position: absolute;
